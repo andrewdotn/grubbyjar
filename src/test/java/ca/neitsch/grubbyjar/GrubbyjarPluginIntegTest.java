@@ -36,6 +36,20 @@ public class GrubbyjarPluginIntegTest
     }
 
     @Test
+    public void testGoodbyeWorld()
+        throws Exception
+    {
+        Util.writeTextToFile(TestUtil.readResource("hello-world-script.gradle"),
+            _gradleBuildFile);
+        Util.writeTextToFile("at_exit{puts 'Goodbye World'.upcase}",
+            _folder.newFile("hello.rb"));
+
+        runGradle();
+
+        assertThat(runJar(), containsString("GOODBYE WORLD"));
+    }
+
+    @Test
     public void testIncludesJavaBits()
     throws Exception
     {

@@ -36,6 +36,8 @@ public class GrubbyjarMain {
         try {
             Object returnValue = s.runScriptlet(main,
                     "uri:classloader://" + GRUBBYJAR_MAIN_RB);
+
+            s.terminate();
             if (returnValue == null)
                 returnValue = Long.valueOf(0);
             System.exit((int)(long)returnValue);
