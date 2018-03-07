@@ -9,5 +9,5 @@ Gem::Specification.new do |spec|
   spec.files         = ['lib/gemspec1.rb']
   spec.executables   = ['gemspec1']
 
-  spec.add_dependency 'concurrent-ruby', '1.0.5'
+  spec.add_dependency 'concurrent-ruby', '1.0.4'
 end
