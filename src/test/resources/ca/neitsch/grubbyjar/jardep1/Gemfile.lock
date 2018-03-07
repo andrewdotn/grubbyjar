@@ -1,0 +1,19 @@
+PATH
+  remote: .
+  specs:
+    jardep1 (0.0.0)
+      concurrent-ruby (= 1.0.4)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    concurrent-ruby (1.0.4-java)
+
+PLATFORMS
+  java
+
+DEPENDENCIES
+  jardep1!
+
+BUNDLED WITH
+   1.16.1
