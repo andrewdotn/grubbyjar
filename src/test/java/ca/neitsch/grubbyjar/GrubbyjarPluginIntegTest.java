@@ -19,7 +19,9 @@ public class GrubbyjarPluginIntegTest
             "x.set",
             "puts x",
             "puts x.set",
-            "raise 'Version Mismatch' unless Concurrent::VERSION == '1.0.5'");
+            "raise 'Version Mismatch' unless Concurrent::VERSION == '1.0.4'");
+
+
 
     @Test
     public void testHelloWorld()
@@ -33,6 +35,20 @@ public class GrubbyjarPluginIntegTest
         runGradle();
 
         assertThat(runJar(), containsString("HELLO WORLD"));
+    }
+
+    @Test
+    public void testGoodbyeWorld()
+        throws Exception
+    {
+        Util.writeTextToFile(TestUtil.readResource("hello-world-script.gradle"),
+            _gradleBuildFile);
+        Util.writeTextToFile("at_exit{puts 'Goodbye World'.upcase}",
+            _folder.newFile("hello.rb"));
+
+        runGradle();
+
+        assertThat(runJar(), containsString("GOODBYE WORLD"));
     }
 
     @Test
@@ -150,7 +166,7 @@ public class GrubbyjarPluginIntegTest
     public void testAccessingUnbundledSystemGemShouldFail()
     throws Exception
     {
-        new SystemGem("concurrent-ruby", "concurrent").ensureInstalled();
+        assertThat("concurrent gem is installed", new SystemGem("concurrent-ruby", "concurrent").isInstalled());
 
         Util.writeTextToFile(TestUtil.readResource("hello-world-script.gradle"),
                 _gradleBuildFile);

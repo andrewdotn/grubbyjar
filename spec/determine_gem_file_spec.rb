@@ -16,8 +16,8 @@ RSpec.describe '#determine_gem_files' do
 
     expect(determine_gem_files(gemfile, gemfile_lock)).to contain_exactly(
         include(ggem::NAME => "bundler"),
-        include(ggem::NAME => "concurrent-ruby", "version" => "1.0.5",
-            ggem::INSTALL_PATH => match('/gems/concurrent-ruby-1.0.5')))
+        include(ggem::NAME => "concurrent-ruby", "version" => "1.0.4",
+            ggem::INSTALL_PATH => match('/gems/concurrent-ruby-1.0.4')))
   end
 
   it 'gets executables from gemspecs' do
@@ -26,8 +26,8 @@ RSpec.describe '#determine_gem_files' do
 
     expect(determine_gem_files(gemfile, gemfile_lock)).to contain_exactly(
         include(ggem::NAME => "bundler"),
-        include(ggem::NAME => "concurrent-ruby", "version" => "1.0.5",
-            ggem::INSTALL_PATH => match('/gems/concurrent-ruby-1.0.5')),
+        include(ggem::NAME => "concurrent-ruby", "version" => "1.0.4",
+            ggem::INSTALL_PATH => match('/gems/concurrent-ruby-1.0.4')),
         hash_including(ggem::NAME => "gemspec1",
             ggem::EXECUTABLE => "bin/gemspec1",
             ggem::SPEC_TEXT => include("stub: gemspec1")))

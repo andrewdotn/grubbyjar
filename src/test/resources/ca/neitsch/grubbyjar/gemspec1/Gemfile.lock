@@ -2,18 +2,18 @@ PATH
   remote: .
   specs:
     gemspec1 (0.0.0)
-      concurrent-ruby (= 1.0.5)
+      concurrent-ruby (= 1.0.4)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    concurrent-ruby (1.0.5)
+    concurrent-ruby (1.0.4-java)
 
 PLATFORMS
-  ruby
+  java
 
 DEPENDENCIES
   gemspec1!
 
 BUNDLED WITH
-   1.15.4
+   1.16.1

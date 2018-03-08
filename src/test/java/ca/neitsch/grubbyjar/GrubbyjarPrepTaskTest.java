@@ -1,5 +1,6 @@
 package ca.neitsch.grubbyjar;
 
+import com.google.common.base.Splitter;
 import com.google.common.collect.Sets;
 import org.gradle.api.GradleException;
 import org.gradle.api.Project;
@@ -40,7 +41,7 @@ public class GrubbyjarPrepTaskTest {
     public void testVerifyJrubyInClasspathExists() {
         Set<File> classpath = Sets.newHashSet();
 
-        for (String s: System.getProperty("java.class.path").split(File.pathSeparator)) {
+        for (String s: Splitter.on(File.pathSeparator).split(System.getProperty("java.class.path"))) {
             classpath.add(new File(s));
         }
 
