@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.description   = ""
   spec.summary       = ""
   spec.license       = "BSD"
-  spec.files         = ['lib/gemspec1.rb']
+  spec.files         = ['lib/gemspec1.rb', 'foo/bar/blah.json']
   spec.executables   = ['gemspec1']
 
   spec.add_dependency 'concurrent-ruby', '1.0.5'

@@ -1,6 +1,5 @@
 package ca.neitsch.grubbyjar;
 
-import org.gradle.internal.impldep.org.apache.maven.model.Build;
 import org.junit.Test;
 import org.zeroturnaround.exec.InvalidExitValueException;
 
@@ -208,6 +207,26 @@ public class GrubbyjarPluginIntegTest
 
         String output = runJar();
         assertThat(output, containsString("#<Concurrent::Event"));
+    }
+
+    @Test
+    public void testExtraNestedDirectories() throws Exception {
+        copyResourcesToDirectory("gemspec1", _folder.getRoot(),
+                "Gemfile",
+                "Gemfile.lock",
+                "foo/bar/blah.json",
+                "build.gradle",
+                "gemspec1.gemspec");
+
+        textFile("bin/gemspec1", textFromLines(
+                "file = File.expand_path('../../foo/bar/blah.json', __FILE__)",
+                "puts file",
+                "puts IO.read(file)"));
+
+        runGradle();
+
+        String output = runJar();
+        assertThat(output, containsString("{\"hello\": \"world\"}"));
     }
 
     @Test

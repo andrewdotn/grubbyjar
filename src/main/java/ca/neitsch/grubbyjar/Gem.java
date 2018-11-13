@@ -93,8 +93,10 @@ public class Gem {
 
         Set<String> directories = Sets.newHashSet();
         for (String f: files) {
-            if (f.contains("/"))
-                directories.add(f.substring(0, f.lastIndexOf("/")));
+            while (f.contains("/")) {
+                f = f.substring(0, f.lastIndexOf("/"));
+                directories.add(f);
+            }
         }
 
         _files = Sets.newHashSet(files);
