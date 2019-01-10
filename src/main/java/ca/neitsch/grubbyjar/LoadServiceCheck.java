@@ -41,7 +41,7 @@ public class LoadServiceCheck {
 
     public boolean containsLoadServiceFor(String path) {
         if (path.endsWith(".jar"))
-            return false;
+            path = path.replaceFirst("\\.jar$", "");
 
         for (String name: javaClassNames(path)) {
             // Note that ClassLoader.getResource() requires an absolute path not

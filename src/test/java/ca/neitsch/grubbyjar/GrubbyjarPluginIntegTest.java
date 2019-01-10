@@ -20,6 +20,14 @@ public class GrubbyjarPluginIntegTest
             "puts x.set",
             "raise 'Version Mismatch' unless Concurrent::VERSION == '1.0.5'");
 
+    private static final String HELLO_CONCURRENT_RB_1_1_1 = textFromLines(
+            "require 'concurrent'",
+            "x = Concurrent::Event.new",
+            "x.set",
+            "puts x",
+            "puts x.set",
+            "raise 'Version Mismatch' unless Concurrent::VERSION == '1.1.1'");
+
     @Test
     public void testHelloWorld()
     throws Exception
@@ -185,6 +193,26 @@ public class GrubbyjarPluginIntegTest
         );
 
         textFile("hello.rb", HELLO_CONCURRENT_RB);
+
+        runGradle();
+
+        String output = runJar();
+        assertThat(output, containsString("#<Concurrent::Event"));
+        assertThat(output, endsWith("\ntrue\n"));
+    }
+
+    @Test
+    public void testNewServiceForConcurrentRuby111() throws Exception {
+        Util.writeTextToFile(TestUtil.readResource("hello-world-script.gradle"), _gradleBuildFile
+        );
+
+        Util.writeTextToFile(TestUtil.readResource("concurrent-ruby.Gemfile"), _folder.newFile("Gemfile")
+        );
+
+        Util.writeTextToFile(TestUtil.readResource("concurrent-ruby.Gemfile.111.lock"), _folder.newFile("Gemfile.lock")
+        );
+
+        textFile("hello.rb", HELLO_CONCURRENT_RB_1_1_1);
 
         runGradle();
 
