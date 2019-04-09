@@ -16,8 +16,13 @@ Given a jruby script `foo.rb` and this `build.gradle`:
         runtimeOnly "org.jruby:jruby-complete:9.1.12.0"
     }
 
-`gradle grubbyjar` will build a self-contained jar that runs `foo.rb`
-when you run `java -jar build/libs/<project name>-grubbyjar.jar`.
+`gradle grubbyjar` will build a self-contained jar that runs `foo.rb` when
+you run `java -jar build/libs/<project name>-grubbyjar.jar`. This
+self-contained jar will contain not only the JRuby runtime and all java
+library dependencies that you declare, but also all of the gems from the
+Gemfile. And it will ignore any gems installed locally on the target
+machine, so that you can reliably deploy JRuby apps without installing
+any other jars, JRuby, or any gems on the target.
 
 ## Including java code
 
